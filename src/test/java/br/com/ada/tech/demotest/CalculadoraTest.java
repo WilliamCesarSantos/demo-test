@@ -1,5 +1,6 @@
-package com.ada.tech.demotest;
+package br.com.ada.tech.demotest;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,9 +11,7 @@ public class CalculadoraTest {
     @Test
     public void somarDoisMaisDoisDeveSerIgualAQuartro() {
         BigDecimal resultado = calculadora.somar(BigDecimal.valueOf(2), BigDecimal.valueOf(2));
-        if (resultado.longValue() != 4) {
-            throw new RuntimeException("calculadora em falha.");
-        }
+        Assertions.assertEquals(BigDecimal.valueOf(4), resultado);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.ada.tech.demotest;
+package br.com.ada.tech.demotest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

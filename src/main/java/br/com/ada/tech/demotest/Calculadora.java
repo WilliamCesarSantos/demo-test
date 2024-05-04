@@ -1,4 +1,4 @@
-package com.ada.tech.demotest;
+package br.com.ada.tech.demotest;
 
 import java.math.BigDecimal;
 
