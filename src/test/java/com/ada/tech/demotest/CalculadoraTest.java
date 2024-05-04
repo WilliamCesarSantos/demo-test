@@ -39,4 +39,19 @@ public class CalculadoraTest {
         }
     }
 
+    @Test
+    public void multiplicar_DoisPorDois_DeveSerIgualAQuatro() {
+        // Prover os dados para execução
+        BigDecimal one = BigDecimal.valueOf(2);
+        BigDecimal two = BigDecimal.valueOf(2);
+
+        // Chamar a execução
+        BigDecimal resultado = calculadora.multiply(one, two);
+
+        // Conferir resultado
+        if (resultado.compareTo(BigDecimal.valueOf(4)) != 0) {
+            throw new RuntimeException("Calculadora em falha");
+        }
+    }
+
 }
