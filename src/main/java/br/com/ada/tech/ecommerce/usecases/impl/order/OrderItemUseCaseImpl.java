@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Service
 public class OrderItemUseCaseImpl implements IOrderItemUseCase {
@@ -40,20 +41,8 @@ public class OrderItemUseCaseImpl implements IOrderItemUseCase {
     @Override
     public OrderItem changeAmount(Order order, Product product, Integer amount) {
         OrderItem item = order.getItems().stream()
-                .filter(it -> it.getProduct().getId() == product.getId())//Lambda
+                .filter(it -> Objects.equals(it.getProduct().getId(), product.getId()))
                 .findAny().orElseThrow(() -> new RuntimeException("Item não faz parte do pedido"));
-
-        /* Código faz a mesma ação que o código acima
-        OrderItem item = null;
-        for (OrderItem i = order.getItems()) {
-            if (i.getProduct().getId() == product.getId()) {
-                item = i;
-                break;
-            }
-        }
-        if (item == null) {
-            throw new RuntimeException("Item não faz parte no pedido");
-        }*/
         item.setAmount(amount);
         return item;
     }
@@ -64,18 +53,10 @@ public class OrderItemUseCaseImpl implements IOrderItemUseCase {
             order.setItems(new ArrayList<>());
         }
 
-        Boolean removed = order.getItems().removeIf(it -> it.getProduct().getId() == product.getId());
+        Boolean removed = order.getItems().removeIf(it -> Objects.equals(it.getProduct().getId(), product.getId()));
         if (!removed) {
             throw new RuntimeException("Produto não encontrado no pedido");
         }
-        /*Iterator<OrderItem> it = order.getItems().listIterator();
-        while(it.hasNext()) {
-            OrderItem item = it.next();
-            if (item.getProduct().getId() == product.getId()) {
-                it.remove();
-                break;
-            }
-        }*/
     }
 
 }
