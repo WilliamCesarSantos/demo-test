@@ -10,9 +10,6 @@ public class OrderPayUseCaseImplUnitTest {
 
     // Pagar um pedido com status de pendente, deve ficar com status de pago
 
-    // Após pagar um pedido deve ser enviado e-mail ao cliente.
-
-    // Ao ocorrer erro no pagamento, não deve notificar o cliente.
 
 
 }
