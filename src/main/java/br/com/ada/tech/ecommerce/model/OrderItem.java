@@ -13,7 +13,7 @@ public class OrderItem {
     private Long id;
     @ManyToOne
     private Product product;
-    private BigDecimal saleValue;
+    private BigDecimal salesValue;
     private Integer amount;
 
     public Long getId() {
@@ -32,12 +32,12 @@ public class OrderItem {
         this.product = product;
     }
 
-    public BigDecimal getSaleValue() {
-        return saleValue;
+    public BigDecimal getSalesValue() {
+        return salesValue;
     }
 
-    public void setSaleValue(BigDecimal saleValue) {
-        this.saleValue = saleValue;
+    public void setSalesValue(BigDecimal salesValue) {
+        this.salesValue = salesValue;
     }
 
     public Integer getAmount() {

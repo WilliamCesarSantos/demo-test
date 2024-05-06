@@ -32,7 +32,7 @@ public class OrderItemUseCaseImpl implements IOrderItemUseCase {
         OrderItem item = new OrderItem();
         item.setProduct(product);
         item.setAmount(amount);
-        item.setSaleValue(price);
+        item.setSalesValue(price);
         order.getItems().add(item);
         repository.save(order);
         return item;

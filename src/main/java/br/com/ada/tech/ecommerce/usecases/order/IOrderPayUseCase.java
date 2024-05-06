@@ -4,7 +4,6 @@ import br.com.ada.tech.ecommerce.model.Order;
 
 public interface IOrderPayUseCase {
 
-
     /*
      * 1 - Pedido precisa estar com status == OrderStatus.PENDING_PAYMENT
      * 2 - Pedido deve passar a ter o status igual a OrderStatus.PAID
