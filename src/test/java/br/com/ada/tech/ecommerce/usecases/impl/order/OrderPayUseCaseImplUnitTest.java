@@ -3,20 +3,26 @@ package br.com.ada.tech.ecommerce.usecases.impl.order;
 import br.com.ada.tech.ecommerce.model.Order;
 import br.com.ada.tech.ecommerce.model.OrderStatus;
 import br.com.ada.tech.ecommerce.usecases.exception.InvalidOrderStatusException;
+import br.com.ada.tech.ecommerce.usecases.order.IPaidOrderNotifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class OrderPayUseCaseImplUnitTest {
 
+    private IPaidOrderNotifier notifier;
     private OrderPayUseCaseImpl useCase;
     private Order order;
 
     @BeforeEach
     public void setup() {
-        useCase = new OrderPayUseCaseImpl();
-
         order = new Order();
+
+        notifier = Mockito.mock(IPaidOrderNotifier.class);
+
+        useCase = new OrderPayUseCaseImpl(notifier);
+
     }
 
     // tentar pagar pedido com status de aberto, deve ocorre erro
@@ -35,6 +41,15 @@ public class OrderPayUseCaseImplUnitTest {
         Assertions.assertThrows(InvalidOrderStatusException.class, () -> useCase.pay(order));
     }
 
+    @Test
+    public void pay_orderWithStatusEqualsOpen_mustNotNotifierCustomer() {
+        order.setStatus(OrderStatus.PAID);
+
+        Assertions.assertThrows(InvalidOrderStatusException.class, () -> useCase.pay(order));
+
+        Mockito.verify(notifier, Mockito.never()).notify(order);
+    }
+
     // Tentar pagar pedido com status de pendente, deve ocorrer com sucesso.
     @Test
     public void pay_orderWithStatusEqualsPendingPayment_hasSuccess() {
@@ -51,6 +66,15 @@ public class OrderPayUseCaseImplUnitTest {
         useCase.pay(order);
 
         Assertions.assertEquals(OrderStatus.PAID, order.getStatus());
+    }
+
+    @Test
+    public void pay_orderWithStatusPending_shouldNotifierCustomer() {
+        order.setStatus(OrderStatus.PENDING_PAYMENT);
+
+        useCase.pay(order);
+
+        Mockito.verify(notifier, Mockito.times(1)).notify(order);
     }
 
 }
