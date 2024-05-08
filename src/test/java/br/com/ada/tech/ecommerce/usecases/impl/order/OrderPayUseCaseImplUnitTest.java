@@ -22,7 +22,6 @@ public class OrderPayUseCaseImplUnitTest {
         notifier = Mockito.mock(IPaidOrderNotifier.class);
 
         useCase = new OrderPayUseCaseImpl(notifier);
-
     }
 
     // tentar pagar pedido com status de aberto, deve ocorre erro
@@ -43,7 +42,7 @@ public class OrderPayUseCaseImplUnitTest {
 
     @Test
     public void pay_orderWithStatusEqualsOpen_mustNotNotifierCustomer() {
-        order.setStatus(OrderStatus.PAID);
+        order.setStatus(OrderStatus.OPEN);
 
         Assertions.assertThrows(InvalidOrderStatusException.class, () -> useCase.pay(order));
 
