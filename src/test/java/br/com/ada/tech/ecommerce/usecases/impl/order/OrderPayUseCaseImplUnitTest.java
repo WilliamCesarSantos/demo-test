@@ -7,6 +7,8 @@ import br.com.ada.tech.ecommerce.usecases.order.IPaidOrderNotifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 
 public class OrderPayUseCaseImplUnitTest {
@@ -33,8 +35,9 @@ public class OrderPayUseCaseImplUnitTest {
     }
 
     // Tentar pagar pedido com status de pago, deve ocorrer erro
-    @Test
-    public void pay_orderWithStatusEqualsPaid_throwException() {
+    @ParameterizedTest
+    @ValueSource(strings = {"OPEN", "CLOSE"})
+    public void pay_orderWithStatusEqualsPaid_throwException(String value) {
         order.setStatus(OrderStatus.PAID);
 
         Assertions.assertThrows(InvalidOrderStatusException.class, () -> useCase.pay(order));
