@@ -26,19 +26,12 @@ public class OrderPayUseCaseImplUnitTest {
         useCase = new OrderPayUseCaseImpl(notifier);
     }
 
-    // tentar pagar pedido com status de aberto, deve ocorre erro
-    @Test
-    public void pay_orderWithStatusEqualsOpen_throwException() {
-        order.setStatus(OrderStatus.OPEN);
-
-        Assertions.assertThrows(InvalidOrderStatusException.class, () -> useCase.pay(order));
-    }
-
     // Tentar pagar pedido com status de pago, deve ocorrer erro
     @ParameterizedTest
-    @ValueSource(strings = {"OPEN", "CLOSE"})
-    public void pay_orderWithStatusEqualsPaid_throwException(String value) {
-        order.setStatus(OrderStatus.PAID);
+    @ValueSource(strings = {"OPEN", "PAID", "SHIPPING", "FINISH"})
+    public void pay_orderWithStatusInvalid_throwException(String value) {
+        var status = OrderStatus.valueOf(value);
+        order.setStatus(status);
 
         Assertions.assertThrows(InvalidOrderStatusException.class, () -> useCase.pay(order));
     }

@@ -4,9 +4,7 @@ import br.com.ada.tech.ecommerce.model.Customer;
 import br.com.ada.tech.ecommerce.model.OrderStatus;
 import br.com.ada.tech.ecommerce.usecases.repository.ICustomerRepository;
 import br.com.ada.tech.ecommerce.usecases.repository.IOrderRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -14,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CreateOrderUseCaseImplUnitTest {
 
     @Mock
@@ -35,6 +34,7 @@ public class CreateOrderUseCaseImplUnitTest {
 
     // Criar pedido para cliente existente. Deve ter sucesso
     @Test
+    @Order(2)
     public void create_customerExistent_hasSuccess() {
         Mockito.when(
                 customerRepository.findByDocument(customer.getDocument())
@@ -47,6 +47,7 @@ public class CreateOrderUseCaseImplUnitTest {
 
     // Criar pedido para cliente inexistente, deve ocorrer um erro.
     @Test
+    @Order(1)
     public void create_customerNotExists_mustThrowsException() {
         var customer = new Customer();
         customer.setDocument("invalid");
