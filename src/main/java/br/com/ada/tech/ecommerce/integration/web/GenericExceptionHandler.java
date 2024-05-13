@@ -59,4 +59,19 @@ public class GenericExceptionHandler {
                 .body(body);
     }
 
+    @ExceptionHandler(value = {Exception.class})
+    public ResponseEntity<Object>  handleException(
+            Exception ex,
+            WebRequest request
+    ) {
+        log.warn("Unhandled exception:", ex);
+        var body = Map.of(
+                "code", HttpStatus.INTERNAL_SERVER_ERROR,
+                "message", "Sorry, we have a problem. Try again late..."
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(body);
+    }
+
 }
