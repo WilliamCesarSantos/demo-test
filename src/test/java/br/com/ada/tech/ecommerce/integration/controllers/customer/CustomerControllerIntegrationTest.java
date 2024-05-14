@@ -2,14 +2,10 @@ package br.com.ada.tech.ecommerce.integration.controllers.customer;
 
 import br.com.ada.tech.ecommerce.integration.email.SendEmail;
 import br.com.ada.tech.ecommerce.usecases.customer.ICustomerUseCase;
-import com.icegreen.greenmail.configuration.GreenMailConfiguration;
-import com.icegreen.greenmail.junit5.GreenMailExtension;
-import com.icegreen.greenmail.util.ServerSetup;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -50,7 +46,14 @@ public class CustomerControllerIntegrationTest {
                                 """)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-        ).andDo(MockMvcResultHandlers.print());
+        ).andDo(
+                MockMvcResultHandlers.print()
+        ).andExpect(
+                MockMvcResultMatchers.status().isBadRequest()
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.errors[1].name")
+                        .value("must not be null")
+        );
 
         Mockito.verify(useCase, Mockito.never()).create(Mockito.any());
     }
