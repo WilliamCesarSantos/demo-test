@@ -1,5 +1,6 @@
 package br.com.ada.tech.ecommerce.integration.controllers.customer;
 
+import br.com.ada.tech.ecommerce.integration.email.SendEmail;
 import br.com.ada.tech.ecommerce.usecases.customer.ICustomerUseCase;
 import com.icegreen.greenmail.configuration.GreenMailConfiguration;
 import com.icegreen.greenmail.junit5.GreenMailExtension;
@@ -13,6 +14,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,13 +32,9 @@ public class CustomerControllerIntegrationTest {
 
     @SpyBean
     private ICustomerUseCase useCase;
-    
-    @RegisterExtension
-    static GreenMailExtension greenMail = new GreenMailExtension(
-            ServerSetup.SMTP.port(3025)
-    ).withConfiguration(GreenMailConfiguration.aConfig()
-            .withUser("green@mail.com", "123456")
-    ).withPerMethodLifecycle(false);
+
+    @MockBean
+    private SendEmail sendEmail;
 
     @Test
     public void create_customerWithoutName_shouldThrowException() throws Exception {
