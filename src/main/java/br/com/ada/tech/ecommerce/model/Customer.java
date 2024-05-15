@@ -18,6 +18,7 @@ public class Customer implements Serializable, Comparable<Customer> {
     private List<String> email;
     private List<String> telephone;
     private LocalDate birthDate;
+    private Double score;
 
     public Long getId() {
         return id;
@@ -65,6 +66,14 @@ public class Customer implements Serializable, Comparable<Customer> {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 
     @Override

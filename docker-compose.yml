@@ -21,6 +21,13 @@ services:
       - postgres
     networks:
       - postgres-network
+  wiremock:
+    image: "wiremock/wiremock:latest"
+    ports:
+      - '8082:8080'
+    volumes:
+      - ./src/test/resources/wiremock/stubs/mappings:/home/wiremock/mappings
+    entrypoint: [ "/docker-entrypoint.sh", "--global-response-templating", "--verbose" ]
 
 networks:
   postgres-network:
