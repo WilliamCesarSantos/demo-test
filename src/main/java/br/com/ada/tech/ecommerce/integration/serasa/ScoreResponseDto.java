@@ -1,4 +1,4 @@
-package br.com.ada.tech.ecommerce.integration.serase;
+package br.com.ada.tech.ecommerce.integration.serasa;
 
 public class ScoreResponseDto {
 

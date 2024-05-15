@@ -1,4 +1,4 @@
-package br.com.ada.tech.ecommerce.integration.serase;
+package br.com.ada.tech.ecommerce.integration.serasa;
 
 import br.com.ada.tech.ecommerce.model.Customer;
 import br.com.ada.tech.ecommerce.model.CustomerScore;
