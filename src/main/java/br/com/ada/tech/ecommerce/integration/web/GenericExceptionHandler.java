@@ -1,5 +1,6 @@
 package br.com.ada.tech.ecommerce.integration.web;
 
+import br.com.ada.tech.ecommerce.usecases.impl.order.exception.InvalidOrderException;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +60,20 @@ public class GenericExceptionHandler {
                 .body(body);
     }
 
+    @ExceptionHandler(value = {InvalidOrderException.class})
+    public ResponseEntity<Object>  handleInvalidOrderException(
+            InvalidOrderException ex,
+            WebRequest request
+    ) {
+        log.warn("Unhandled exception:", ex);
+        var body = Map.of(
+                "code", HttpStatus.BAD_REQUEST,
+                "message", ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(body);
+    }
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object>  handleException(
             Exception ex,
