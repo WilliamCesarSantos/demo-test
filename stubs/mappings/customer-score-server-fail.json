@@ -1,0 +1,16 @@
+{
+  "request": {
+    "url": "/serasa/scores?document=server-fail",
+    "method": "GET"
+  },
+  "response": {
+    "status": 500,
+    "jsonBody": {
+      "code": "500",
+      "message":  "We're sorry, but we're having a problem. Try again late"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

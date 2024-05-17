@@ -1,0 +1,16 @@
+{
+  "request": {
+    "url": "/serasa/scores?document=client-fail",
+    "method": "GET"
+  },
+  "response": {
+    "status": 403,
+    "jsonBody": {
+      "code": "403",
+      "message":  "API exhaustion at your license. Contact support for increase your request limit."
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

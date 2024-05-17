@@ -1,0 +1,17 @@
+{
+  "request": {
+    "url": "/serasa/scores?document=50",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "document": "{{request.query.document}}",
+      "name":  "{{randomValue length=20 type='ALPHABETIC'}}",
+      "score":  50.0
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

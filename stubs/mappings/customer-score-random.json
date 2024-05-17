@@ -1,0 +1,23 @@
+{
+  "priority": 100,
+  "request": {
+    "urlPath": "/serasa/scores",
+    "method": "GET",
+    "queryParameters": {
+      "document": {
+        "matches": "(.*)"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "document": "{{request.query.document}}",
+      "name":  "{{randomValue length=20 type='ALPHABETIC'}}",
+      "score":  "{{randomValue length=2 type='NUMERIC'}}"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
