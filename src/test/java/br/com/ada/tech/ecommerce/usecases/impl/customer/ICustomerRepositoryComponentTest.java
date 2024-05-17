@@ -1,4 +1,4 @@
-package br.com.ada.tech.ecommerce.usecases.impl.order;
+package br.com.ada.tech.ecommerce.usecases.impl.customer;
 
 import br.com.ada.tech.ecommerce.model.Customer;
 import br.com.ada.tech.ecommerce.usecases.repository.ICustomerRepository;
