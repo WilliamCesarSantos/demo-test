@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface SerasaFeignClient {
 
     @GetMapping(
-            value= "?document=${document}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
