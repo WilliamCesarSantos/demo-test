@@ -37,6 +37,12 @@ public class ProductController {
                 .map(this::toDto).collect(Collectors.toList());
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ProductDto findByBarcode(@RequestParam(value = "barcode", required = false) String barcode) {
+        var product = productUseCase.findByBarcode(barcode);
+        return toDto(product);
+    }
+
     private Product fromDto(ProductDto dto) {
         Product product = new Product();
         product.setBarcode(dto.getBarcode());
