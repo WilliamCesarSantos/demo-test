@@ -32,15 +32,16 @@ public class ProductController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProductDto> list() {
-        return productUseCase.listAll().stream()
-                .map(this::toDto).collect(Collectors.toList());
-    }
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ProductDto findByBarcode(@RequestParam(value = "barcode", required = false) String barcode) {
-        var product = productUseCase.findByBarcode(barcode);
-        return toDto(product);
+    public List<ProductDto> list(@RequestParam(value = "barcode", required = false) String barcode) {
+        List<ProductDto> products = List.of();
+        if (barcode != null) {
+            var product = productUseCase.findByBarcode(barcode);
+            products = List.of(toDto(product));
+        } else {
+            products = productUseCase.listAll().stream()
+                    .map(this::toDto).collect(Collectors.toList());
+        }
+        return products;
     }
 
     private Product fromDto(ProductDto dto) {
